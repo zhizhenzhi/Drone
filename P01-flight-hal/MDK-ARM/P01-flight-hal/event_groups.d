@@ -1,0 +1,15 @@
+p01-flight-hal\event_groups.o: freeRTOS\event_groups.c
+p01-flight-hal\event_groups.o: D:\32\ARM\ARMCC\Bin\..\include\stdlib.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/FreeRTOS.h
+p01-flight-hal\event_groups.o: D:\32\ARM\ARMCC\Bin\..\include\stddef.h
+p01-flight-hal\event_groups.o: D:\32\ARM\ARMCC\Bin\..\include\stdint.h
+p01-flight-hal\event_groups.o: ./freeRTOS/FreeRTOSConfig.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/projdefs.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/portable.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/deprecated_definitions.h
+p01-flight-hal\event_groups.o: ./freeRTOS/ARM_CM3/portmacro.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/mpu_wrappers.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/task.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/list.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/timers.h
+p01-flight-hal\event_groups.o: ./freeRTOS/include/event_groups.h

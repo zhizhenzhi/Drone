@@ -1,0 +1,15 @@
+.\p02-remote-hal\event_groups.o: freeRTOS\event_groups.c
+.\p02-remote-hal\event_groups.o: D:\32\ARM\ARMCC\Bin\..\include\stdlib.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/FreeRTOS.h
+.\p02-remote-hal\event_groups.o: D:\32\ARM\ARMCC\Bin\..\include\stddef.h
+.\p02-remote-hal\event_groups.o: D:\32\ARM\ARMCC\Bin\..\include\stdint.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/FreeRTOSConfig.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/projdefs.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/portable.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/deprecated_definitions.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/ARM_CM3/portmacro.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/mpu_wrappers.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/task.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/list.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/timers.h
+.\p02-remote-hal\event_groups.o: ./freeRTOS/include/event_groups.h

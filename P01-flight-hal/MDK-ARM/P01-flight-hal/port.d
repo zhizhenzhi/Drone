@@ -1,0 +1,12 @@
+p01-flight-hal\port.o: freeRTOS\ARM_CM3\port.c
+p01-flight-hal\port.o: ./freeRTOS/include/FreeRTOS.h
+p01-flight-hal\port.o: D:\32\ARM\ARMCC\Bin\..\include\stddef.h
+p01-flight-hal\port.o: D:\32\ARM\ARMCC\Bin\..\include\stdint.h
+p01-flight-hal\port.o: ./freeRTOS/FreeRTOSConfig.h
+p01-flight-hal\port.o: ./freeRTOS/include/projdefs.h
+p01-flight-hal\port.o: ./freeRTOS/include/portable.h
+p01-flight-hal\port.o: ./freeRTOS/include/deprecated_definitions.h
+p01-flight-hal\port.o: ./freeRTOS/ARM_CM3/portmacro.h
+p01-flight-hal\port.o: ./freeRTOS/include/mpu_wrappers.h
+p01-flight-hal\port.o: ./freeRTOS/include/task.h
+p01-flight-hal\port.o: ./freeRTOS/include/list.h

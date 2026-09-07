@@ -1,0 +1,13 @@
+p01-flight-hal\croutine.o: freeRTOS\croutine.c
+p01-flight-hal\croutine.o: ./freeRTOS/include/FreeRTOS.h
+p01-flight-hal\croutine.o: D:\32\ARM\ARMCC\Bin\..\include\stddef.h
+p01-flight-hal\croutine.o: D:\32\ARM\ARMCC\Bin\..\include\stdint.h
+p01-flight-hal\croutine.o: ./freeRTOS/FreeRTOSConfig.h
+p01-flight-hal\croutine.o: ./freeRTOS/include/projdefs.h
+p01-flight-hal\croutine.o: ./freeRTOS/include/portable.h
+p01-flight-hal\croutine.o: ./freeRTOS/include/deprecated_definitions.h
+p01-flight-hal\croutine.o: ./freeRTOS/ARM_CM3/portmacro.h
+p01-flight-hal\croutine.o: ./freeRTOS/include/mpu_wrappers.h
+p01-flight-hal\croutine.o: ./freeRTOS/include/task.h
+p01-flight-hal\croutine.o: ./freeRTOS/include/list.h
+p01-flight-hal\croutine.o: ./freeRTOS/include/croutine.h

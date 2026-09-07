@@ -1,0 +1,14 @@
+p01-flight-hal\stream_buffer.o: freeRTOS\stream_buffer.c
+p01-flight-hal\stream_buffer.o: D:\32\ARM\ARMCC\Bin\..\include\stdint.h
+p01-flight-hal\stream_buffer.o: D:\32\ARM\ARMCC\Bin\..\include\string.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/FreeRTOS.h
+p01-flight-hal\stream_buffer.o: D:\32\ARM\ARMCC\Bin\..\include\stddef.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/FreeRTOSConfig.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/projdefs.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/portable.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/deprecated_definitions.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/ARM_CM3/portmacro.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/mpu_wrappers.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/task.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/list.h
+p01-flight-hal\stream_buffer.o: ./freeRTOS/include/stream_buffer.h
