@@ -1,5 +1,8 @@
 #include "App_receive_data.h"
 
+extern uint8_t back_buff[TX_PLOAD_WIDTH];
+//按下定高之后的飞行高度
+extern uint16_t fix_height;
 //保存解析后的遥控量
 extern Remote_data remote_data;
 //飞行状态
@@ -23,7 +26,17 @@ uint8_t retry_count=0;
 uint8_t App_receive_data(void)
 {
     memset(rxbuff,0,TX_PLOAD_WIDTH);
-    SI24R1_RxPacket(rxbuff);
+
+    uint8_t res = SI24R1_RxPacket(rxbuff);
+    if(res == 0)
+    {
+        //收到遥控数据 准备回传
+        SI24R1_TX_Mode();
+        while(SI24R1_TxPacket(back_buff) == 1)
+        {
+        }
+        SI24R1_RX_Mode();
+    }
 
     if(SI24R1_RxPacket(rxbuff) != 0)
     return 1;
@@ -162,6 +175,9 @@ void App_process_flight_state(void)
         {
             flight_state=FIX_HEIGHT;
             remote_data.fix_height=0;
+
+            //记录下当前目标的高度
+            fix_height = Int_VL53L1X_GetDistance();
         }
         if(remote_state==REMOTE_DISCONNECTED)
         {
@@ -181,8 +197,8 @@ void App_process_flight_state(void)
         }
         break;
         case FAIL:
-        //处理失联故障 缓慢停止电机
-        vTaskDelay(1000);
+        //处理失联故障 缓慢停止电机 一直等待 不会超时
+        ulTaskNotifyTake(pdTRUE,portMAX_DELAY);
         flight_state = IDLE;
 
         break;

@@ -54,3 +54,5 @@
 .\p02-remote-hal\main.o: ./interface/Int_key.h
 .\p02-remote-hal\main.o: ./common/com_tool.h
 .\p02-remote-hal\main.o: ./application/App_transmit_data.h
+.\p02-remote-hal\main.o: ./application/App_dispaly.h
+.\p02-remote-hal\main.o: .\interface\oled\Inf_OLED.h

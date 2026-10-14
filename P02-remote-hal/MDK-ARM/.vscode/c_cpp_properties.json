@@ -111,6 +111,7 @@
                 "d:\\Drone\\personal-drone\\P02-remote-hal\\MDK-ARM\\freeRTOS\\ARM_CM3",
                 "d:\\Drone\\personal-drone\\P02-remote-hal\\MDK-ARM\\application",
                 "d:\\Drone\\personal-drone\\P02-remote-hal\\MDK-ARM\\interface",
+                "d:\\Drone\\personal-drone\\P02-remote-hal\\MDK-ARM\\interface\\oled",
                 "D:\\32\\ARM\\ARMCC\\include",
                 "D:\\32\\ARM\\ARMCC\\include\\rw",
                 "d:\\Drone\\personal-drone\\P02-remote-hal\\MDK-ARM",

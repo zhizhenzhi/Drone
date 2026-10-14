@@ -2,14 +2,13 @@
 
 extern Remote_data remote_data;
 uint8_t transmit_buff[TX_PLOAD_WIDTH]={0};
-
+uint8_t post_buff[TX_PLOAD_WIDTH]={0};
 /**
  * @brief 发送数据给飞机
  */
 void app_transmit_data_process(void)
 {
-    //切换到发送模式
-    SI24R1_TX_Mode();
+
     //发送数据 
     //帧头校验指定发送给对应的设备 
     //发送数据的结尾添加校验和（将发送的数据累加得到的值添加到数据的结尾
@@ -49,9 +48,20 @@ void app_transmit_data_process(void)
     transmit_buff[14]=(sum>>16)&0xFF;
     transmit_buff[15]=(sum>>8)&0xFF;
     transmit_buff[16]=sum&0xFF;
-
-    SI24R1_TxPacket(transmit_buff);
-
+    
+    //切换到发送模式
+    SI24R1_TX_Mode();
+    uint8_t res = SI24R1_TxPacket(transmit_buff);
     //切换回接收模式
     SI24R1_RX_Mode();
+    if(res==0)
+    {
+
+        while(SI24R1_RxPacket(post_buff) == 1)
+        {
+        }
+        //发送失败
+    }
+
+
 }

@@ -25,6 +25,8 @@ p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_e
 p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
 p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
 p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h
+p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h
 p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 p01-flight-hal\app_flight.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
@@ -54,7 +56,12 @@ p01-flight-hal\app_flight.o: D:\32\ARM\ARMCC\Bin\..\include\math.h
 p01-flight-hal\app_flight.o: ./common/Com_pid.h
 p01-flight-hal\app_flight.o: ./interface/motor.h
 p01-flight-hal\app_flight.o: ../Core/Inc/tim.h
+p01-flight-hal\app_flight.o: ./interface/fix_height/Int_VL53L1X.h
+p01-flight-hal\app_flight.o: ./interface/fix_height/vl53l1_platform.h
+p01-flight-hal\app_flight.o: ./interface/fix_height/vl53l1_types.h
+p01-flight-hal\app_flight.o: D:\32\ARM\ARMCC\Bin\..\include\string.h
+p01-flight-hal\app_flight.o: ./interface/fix_height/VL53L1X_api.h
+p01-flight-hal\app_flight.o: ./interface/fix_height/VL53L1X_calibration.h
 p01-flight-hal\app_flight.o: application\App_receive_data.h
 p01-flight-hal\app_flight.o: ./interface/SI24R1.h
 p01-flight-hal\app_flight.o: ../Core/Inc/spi.h
-p01-flight-hal\app_flight.o: D:\32\ARM\ARMCC\Bin\..\include\string.h

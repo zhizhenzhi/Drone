@@ -31,6 +31,13 @@ TaskHandle_t joystick_task_handle;
 #define JOYSTICK_TASK_STACK_SIZE 128
 #define JOYSTICK_TASK_PRIORITY 2
 #define JOYSTICK_TASK_PERIOD 20
+
+//屏幕任务
+void oled_task(void *args);
+TaskHandle_t oled_task_handle;
+#define OLED_TASK_STACK_SIZE 128
+#define OLED_TASK_PRIORITY 1
+#define OLED_TASK_PERIOD 100
 void App_freeRtos_Start(void)
 {
     //创建任务
@@ -38,6 +45,7 @@ void App_freeRtos_Start(void)
     xTaskCreate(com_task,"com_task",COM_TASK_STACK_SIZE,NULL,COM_TASK_PRIORITY,&com_task_handle);
     xTaskCreate(key_task,"key_task",KEY_TASK_STACK_SIZE,NULL,KEY_TASK_PRIORITY,&key_task_handle);
     xTaskCreate(joystick_task,"joystick_task",JOYSTICK_TASK_STACK_SIZE,NULL,JOYSTICK_TASK_PRIORITY,&joystick_task_handle);
+    xTaskCreate(oled_task,"oled_task",OLED_TASK_STACK_SIZE,NULL,OLED_TASK_PRIORITY,&oled_task_handle);
     //启动调度器
     vTaskStartScheduler();
 }
@@ -94,3 +102,13 @@ void com_task(void *args)
     }
 }
 
+void oled_task(void *args)
+{
+    TickType_t last_wake_time = xTaskGetTickCount();
+    while(1)
+    {
+        App_display_init();
+        App_display_show();
+        vTaskDelayUntil(&last_wake_time,OLED_TASK_PERIOD);
+    }
+}

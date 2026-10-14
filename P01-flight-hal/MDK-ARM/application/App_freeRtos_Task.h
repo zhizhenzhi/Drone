@@ -11,6 +11,7 @@
 #include "SI24R1.h"
 #include "App_receive_data.h"
 #include "App_flight.h"
+#include "int_bat_ADC.h"
 /*
 启动freeRTOS操作系统
 */

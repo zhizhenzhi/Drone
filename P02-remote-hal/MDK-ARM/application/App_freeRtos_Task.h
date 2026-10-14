@@ -8,6 +8,7 @@
 #include "SI24R1.h"
 #include "App_process_data.h"
 #include "App_transmit_data.h"
+#include "App_dispaly.h"
 /*
 启动freeRTOS操作系统
 */

@@ -25,6 +25,8 @@ p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx
 p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
 p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
 p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h
+p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h
 p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 p01-flight-hal\app_receive_data.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
@@ -48,3 +50,10 @@ p01-flight-hal\app_receive_data.o: ./freeRTOS/include/task.h
 p01-flight-hal\app_receive_data.o: ./freeRTOS/include/list.h
 p01-flight-hal\app_receive_data.o: ./common/com_config.h
 p01-flight-hal\app_receive_data.o: D:\32\ARM\ARMCC\Bin\..\include\string.h
+p01-flight-hal\app_receive_data.o: ./interface/fix_height/Int_VL53L1X.h
+p01-flight-hal\app_receive_data.o: ./interface/fix_height/vl53l1_platform.h
+p01-flight-hal\app_receive_data.o: ./interface/fix_height/vl53l1_types.h
+p01-flight-hal\app_receive_data.o: D:\32\ARM\ARMCC\Bin\..\include\stdlib.h
+p01-flight-hal\app_receive_data.o: ../Core/Inc/i2c.h
+p01-flight-hal\app_receive_data.o: ./interface/fix_height/VL53L1X_api.h
+p01-flight-hal\app_receive_data.o: ./interface/fix_height/VL53L1X_calibration.h

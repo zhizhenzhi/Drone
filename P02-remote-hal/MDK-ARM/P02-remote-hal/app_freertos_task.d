@@ -52,3 +52,6 @@
 .\p02-remote-hal\app_freertos_task.o: ./interface/Int_key.h
 .\p02-remote-hal\app_freertos_task.o: ./common/com_tool.h
 .\p02-remote-hal\app_freertos_task.o: application\App_transmit_data.h
+.\p02-remote-hal\app_freertos_task.o: application\App_dispaly.h
+.\p02-remote-hal\app_freertos_task.o: .\interface\oled\Inf_OLED.h
+.\p02-remote-hal\app_freertos_task.o: ../Core/Inc/gpio.h

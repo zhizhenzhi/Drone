@@ -8,6 +8,7 @@
 #include "Com_pid.h"
 #include "motor.h"
 #include "math.h"
+#include "Int_VL53L1X.h"
 /**
  * @brief 根据陀螺仪测量的数据 计算出欧拉角
  */
@@ -24,4 +25,5 @@ void App_flight_pid_process(void);
 void App_flight_motor_process(void);
 void App_flight_init(void);
 
+void App_flight_fix_height_pid(void);
 #endif

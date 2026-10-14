@@ -16,7 +16,11 @@ Remote_State remote_state = REMOTE_CONNECTED;
 Flight_State flight_state = IDLE;
 //扩展获取接收的遥控数据
 Remote_data remote_data = {.thr=0,.yaw=0,.pit=0,.rol=0,.shutdown=0};
+//按下定高时候飞行的高度
+uint16_t fix_height = 0;
 
+//电池电压
+uint8_t back_buff[TX_PLOAD_WIDTH] ={0};
 #define TASK1_STACK_SIZE 128
 //任务优先级 数值越小优先级越小  最大4 不推荐使用最小优先级0
 #define POWER_TASK_PRIORITY 4
@@ -85,6 +89,7 @@ void flight_task(void *args)
      //获取当前的基准时间
     TickType_t last_wake_time = xTaskGetTickCount();
     App_flight_init();
+    uint8_t count=0;
     while(1)
     {
         // motor_start(&left_top_motor);
@@ -95,8 +100,21 @@ void flight_task(void *args)
         App_flight_get_euler_angle();
         //2.根据姿态解算的欧拉角 计算PID输出值
         App_flight_pid_process();
+        //判断定高
+        if(flight_state == FIX_HEIGHT)
+        {
+            //激光测距20ms采集一次
+            count++;
+            if(count>=4)
+            {
+                count=0;
+            }
+        }
         //3.根据PID计算的结果 对电机进行控制
         App_flight_motor_process();
+
+
+
         //每10s执行一次 启动电源避免自动关机
         vTaskDelayUntil(&last_wake_time,FLIGHT_TASK_PERIOD);
 
@@ -187,6 +205,10 @@ void com_task(void *args)
 
        //处理飞机飞行状态
        App_process_flight_state();
+
+       //准备回传电池电压值
+       float voltage=Int_bat_ADC_Get();
+       sprintf(back_buff,".2f",voltage);
         //每6ms执行一次 启动电源避免自动关机
         vTaskDelayUntil(&last_wake_time,COM_TASK_PERIOD);
     }

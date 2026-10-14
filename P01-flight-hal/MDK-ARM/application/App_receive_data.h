@@ -4,6 +4,7 @@
 #include "SI24R1.h"
 #include "com_config.h"
 #include <string.h>
+#include "Int_VL53L1X.h"
 
 #define FRAME_HEADER_CHECK1 'j'
 #define FRAME_HEADER_CHECK2 'y'
