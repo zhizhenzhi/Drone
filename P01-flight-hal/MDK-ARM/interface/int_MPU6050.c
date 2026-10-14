@@ -1,6 +1,12 @@
 #include "int_MPU6050.h"
 
-
+//保存偏移量的值
+int32_t acc_x_offset = 0;
+int32_t acc_y_offset = 0;
+int32_t acc_z_offset = 0;
+int32_t gyro_x_offset = 0;
+int32_t gyro_y_offset = 0;
+int32_t gyro_z_offset = 0;
 
 /**
  * @brief 写入MPU6050传感器数据
@@ -22,6 +28,64 @@ void MPU6050_Read_Data(uint8_t reg,uint8_t *data)
     HAL_I2C_Mem_Read(&hi2c1,MPU6050_ADDR_READ,reg,I2C_MEMADD_SIZE_8BIT,data,1,1000);
 }
 
+/**
+ * @brief 在初始化MPU6050完成之后 计算出加速度传感器的零偏值 
+ */
+void MPU6050_calculate_offset(void)
+{
+    //等待飞机停放平稳 前后两次加速度的值差值小于200 连续100次
+    Accel_struct current_accel={0};
+    Accel_struct last_accel={0};
+    uint8_t count =0;
+    MPU6050_Get_Accel(&last_accel);
+
+    while(count <100)
+    {
+        MPU6050_Get_Accel(&current_accel);
+        if(abs(current_accel.accel_x - last_accel.accel_x) < 200 &&
+           abs(current_accel.accel_y - last_accel.accel_y) < 200 &&
+           abs(current_accel.accel_z - last_accel.accel_z) < 200)
+        {
+            count++;
+        }
+        else
+        {
+            count = 0;
+        }
+        last_accel = current_accel;
+        vTaskDelay(6);
+    }
+
+    //已经平稳 开始进行零偏校准
+    Gyro_Accel_struct gyro_accel_data={0};
+    int32_t acc_x_offset_sum = 0;
+    int32_t acc_y_offset_sum = 0;
+    int32_t acc_z_offset_sum = 0;
+    int32_t gyro_x_offset_sum = 0;
+    int32_t gyro_y_offset_sum = 0;
+    int32_t gyro_z_offset_sum = 0;
+    for(uint8_t i=0;i<100;i++)
+    {
+        //重新读取加速度和角速度
+        MPU6050_Get_Data(&gyro_accel_data);
+        acc_x_offset_sum += (gyro_accel_data.accel.accel_x -0);
+        acc_y_offset_sum += (gyro_accel_data.accel.accel_y -0);
+        //z轴的零偏值是16384 因为MPU6050的加速度量程是2g 所以16384就是2g的值
+        acc_z_offset_sum += (gyro_accel_data.accel.accel_z -16384);
+
+        gyro_x_offset_sum += (gyro_accel_data.gyro.gyro_x - 0);
+        gyro_y_offset_sum += (gyro_accel_data.gyro.gyro_y - 0);
+        gyro_z_offset_sum += (gyro_accel_data.gyro.gyro_z - 0);
+    }
+    acc_x_offset = acc_x_offset_sum / 100;
+    acc_y_offset = acc_y_offset_sum / 100;
+    acc_z_offset = acc_z_offset_sum / 100;
+    gyro_x_offset = gyro_x_offset_sum / 100;
+    gyro_y_offset = gyro_y_offset_sum / 100;
+    gyro_z_offset = gyro_z_offset_sum / 100;
+
+    vTaskDelay(6);
+}
 /**
  * @brief 初始化MPU6050传感器
  */
@@ -54,4 +118,59 @@ void MPU6050_Init(void)
     MPU6050_Write_Data(0x6B,0x01);
     //8.使能加速度传感器和角速度传感器
     MPU6050_Write_Data(0x6C,0x00);
+    //9.进行零偏校准
+    MPU6050_calculate_offset();
+}
+
+
+
+/**
+ * @brief 读取三轴加速度 需要进行零偏校准
+ */
+void MPU6050_Get_Accel(Accel_struct *accel)
+{
+    uint8_t high =0;
+    uint8_t low =0;
+    //X轴
+    MPU6050_Read_Data(MPU_ACCEL_XOUTH_REG,&high);
+    MPU6050_Read_Data(MPU_ACCEL_XOUTL_REG,&low);
+    accel->accel_x = (high << 8 | low);
+
+    //Y轴
+    MPU6050_Read_Data(MPU_ACCEL_YOUTH_REG,&high);
+    MPU6050_Read_Data(MPU_ACCEL_YOUTL_REG,&low);
+    accel->accel_y = (high << 8 | low);
+
+    MPU6050_Read_Data(MPU_ACCEL_ZOUTH_REG,&high);
+    MPU6050_Read_Data(MPU_ACCEL_ZOUTL_REG,&low);
+    accel->accel_z = (high << 8 | low);
+}
+/**
+ * @brief 读取三轴角速度
+ */
+void MPU6050_Get_Gyro(Gyro_struct *gyro)
+{
+    //存储角速度的寄存器地址从0x43开始 高八位在前 xyz的顺序
+    uint8_t high =0 ;
+    uint8_t low =0;
+    MPU6050_Read_Data(MPU_GYRO_XOUTH_REG,&high);
+    MPU6050_Read_Data(MPU_GYRO_XOUTL_REG,&low);
+    gyro->gyro_x = (high << 8 | low);
+
+    MPU6050_Read_Data(MPU_GYRO_YOUTH_REG,&high);
+    MPU6050_Read_Data(MPU_GYRO_YOUTL_REG,&low);
+    gyro->gyro_y = (high << 8 | low);
+
+    MPU6050_Read_Data(MPU_GYRO_ZOUTH_REG,&high);
+    MPU6050_Read_Data(MPU_GYRO_ZOUTL_REG,&low);
+    gyro->gyro_z = (high << 8 | low);
+}
+/**
+/**
+ * @brief 读取六轴数据
+ */
+void MPU6050_Get_Data(Gyro_Accel_struct *data)
+{
+    MPU6050_Get_Accel(&data->accel);
+    MPU6050_Get_Gyro(&data->gyro);
 }

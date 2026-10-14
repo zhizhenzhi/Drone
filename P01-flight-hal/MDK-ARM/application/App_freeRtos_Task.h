@@ -10,6 +10,7 @@
 #include "com_config.h"
 #include "SI24R1.h"
 #include "App_receive_data.h"
+#include "App_flight.h"
 /*
 启动freeRTOS操作系统
 */

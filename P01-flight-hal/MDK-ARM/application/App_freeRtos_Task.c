@@ -2,10 +2,6 @@
 
 //SRAM 20K 分配12K给操作系统
 //内存管理 C语言结构体通常保存在堆中 不会自动垃圾回收 始终使用同一个结构体 不断循环使用
-motor_t left_top_motor ={.tim=&htim3, .channel=TIM_CHANNEL_1, .speed=200};
-motor_t right_top_motor ={.tim=&htim2, .channel=TIM_CHANNEL_2, .speed=200};
-motor_t left_bottom_motor ={.tim=&htim4, .channel=TIM_CHANNEL_4, .speed=200};
-motor_t right_bottom_motor ={.tim=&htim1, .channel=TIM_CHANNEL_3, .speed=200};
 
 //LED结构体
 led_t led1 = {.port=LED1_GPIO_Port, .pin=LED1_Pin};
@@ -19,7 +15,7 @@ Remote_State remote_state = REMOTE_CONNECTED;
 //表示当前飞行状态
 Flight_State flight_state = IDLE;
 //扩展获取接收的遥控数据
-Remote_data remote_data = {0};
+Remote_data remote_data = {.thr=0,.yaw=0,.pit=0,.rol=0,.shutdown=0};
 
 #define TASK1_STACK_SIZE 128
 //任务优先级 数值越小优先级越小  最大4 不推荐使用最小优先级0
@@ -88,12 +84,19 @@ void flight_task(void *args)
 {
      //获取当前的基准时间
     TickType_t last_wake_time = xTaskGetTickCount();
+    App_flight_init();
     while(1)
     {
         // motor_start(&left_top_motor);
         // motor_start(&right_top_motor);
         // motor_start(&left_bottom_motor);
         // motor_start(&right_bottom_motor);
+        //1.根据MPU6050测量的数据 姿态解算获取欧拉角
+        App_flight_get_euler_angle();
+        //2.根据姿态解算的欧拉角 计算PID输出值
+        App_flight_pid_process();
+        //3.根据PID计算的结果 对电机进行控制
+        App_flight_motor_process();
         //每10s执行一次 启动电源避免自动关机
         vTaskDelayUntil(&last_wake_time,FLIGHT_TASK_PERIOD);
 
